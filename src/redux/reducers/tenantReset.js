@@ -1,5 +1,6 @@
 const initState = {
-  billUpdated: false
+  billUpdated: false,
+  transactionStatus: ''
 };
 
 const tenantReset = (state = initState, action) => {
@@ -8,6 +9,11 @@ const tenantReset = (state = initState, action) => {
       return {
         ...state,
         billUpdated: true
+      };
+    case 'TRANSACTION_STATUS_UPDATE':
+      return {
+        ...state,
+        TRANSACTION_SUCCESSFUL: action.transactionStatus
       };
     default:
       return state

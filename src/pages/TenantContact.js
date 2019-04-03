@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar"
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {sendSupportEmail} from "../redux/actions/email";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class TenantContact extends React.Component {
@@ -18,6 +19,10 @@ class TenantContact extends React.Component {
     email: this.props.user.email,
     isLoading: false
   };
+
+  componentDidMount() {
+    restStickyNavBar()
+  }
 
   handleChange = (e) => {
     this.setState({

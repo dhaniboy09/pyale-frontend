@@ -7,11 +7,16 @@ import Aux from '../hoc/Aux_'
 import Navbar from "../components/Navbar";
 import {connect} from "react-redux";
 import {getTenantLettings} from "../redux/actions/tenant";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class MyLetting extends React.Component {
   componentWillMount() {
     this.props.getTenantLettings()
+  }
+
+  componentDidMount() {
+    restStickyNavBar()
   }
 
   render() {

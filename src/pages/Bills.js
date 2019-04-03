@@ -9,6 +9,7 @@ import FooterLinks from "../components/FooterLinks";
 import {getTenantBills} from "../redux/actions/tenant";
 import PaidBills from "../components/PaidBills";
 import UnPaidBills from "../components/UnPaidBills";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class Bills extends React.Component {
@@ -16,9 +17,12 @@ class Bills extends React.Component {
     bills: [],
   };
 
+  componentDidMount() {
+    restStickyNavBar()
+  }
 
   render() {
-    const {isAuthenticated, billUpdated} = this.props;
+    const {isAuthenticated, billUpdated, transactionStatus} = this.props;
     if (!isAuthenticated) {
       return <Redirect to="/login"/>
     }
@@ -41,10 +45,19 @@ class Bills extends React.Component {
                   Manage all bills
                 </p>
                 {
-                  billUpdated &&
-                  <div className="alert alert-success" role="alert">
-                    Payment Successful
-                  </div>
+                  transactionStatus === 'success' &&
+                      <div className="alert alert-success" role="alert">
+                        Transaction Successful.
+                      </div>
+                }
+                {
+                  transactionStatus === 'failure' &&
+                    (
+                      <div className="alert alert-success" role="alert">
+                        Transaction Failed. Please Try Again
+                      </div>
+
+                    )
                 }
               </div>
               <UnPaidBills getTenantBills={this.props.getTenantBills}/>
@@ -65,6 +78,7 @@ const mapStateToProps = (state) => {
     bills: state.tenant.bills,
     billUpdated: state.tenantReset.billUpdated,
     isAuthenticated: state.auth.isAuthenticated,
+    transactionStatus: state.tenantReset.transactionStatus
 
   }
 };

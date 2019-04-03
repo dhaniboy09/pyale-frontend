@@ -9,6 +9,7 @@ import {Alert} from "../components/Alert";
 import SocialMedia from "../components/SocialMedia";
 import Footer from "../components/Footer";
 import FooterLinks from "../components/FooterLinks";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class TenantDocument extends React.Component {
@@ -29,6 +30,10 @@ class TenantDocument extends React.Component {
         isLoading: false
       })
     }
+  }
+
+  componentDidMount() {
+    restStickyNavBar()
   }
 
   render() {

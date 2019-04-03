@@ -22,6 +22,7 @@ import MyLetting from "./pages/MyLetting";
 
 
 class Root extends React.Component {
+
   render() {
     return (
       <BrowserRouter basename={'/'}>

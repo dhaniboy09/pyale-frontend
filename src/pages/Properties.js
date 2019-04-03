@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import {connect} from "react-redux";
 import {filterProperties, loadProperties} from "../redux/actions/properties";
 import {withRouter} from 'react-router-dom';
+import {restStickyNavBar} from "../navHelpers";
 
 
 class Properties extends React.Component {
@@ -17,6 +18,10 @@ class Properties extends React.Component {
 
   componentWillMount() {
     this.props.loadProperties()
+  }
+
+  componentDidMount() {
+    restStickyNavBar()
   }
 
   handleTypeChange = (e) => {

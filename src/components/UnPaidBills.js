@@ -1,18 +1,17 @@
 import React from 'react'
-import moment from 'moment'
 import {connect} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
 import PaystackButton from 'react-paystack';
 import {generateRandomString} from '../helpers'
-import {updateBillPaymentStatus} from "../redux/actions/tenant";
+import {updateBillPaymentStatus, setTransactionStatus} from "../redux/actions/tenant";
 
 const $ = window.$;
+const paystack = require('paystack')('sk_test_05e51b24d45dc368ea913c352f69ae1c36703e69');
 
 class UnPaidBills extends React.Component {
   state = {
     referenceCode: "",
     billID: null,
-    paymentDate: "",
     unpaidBills: []
   };
 
@@ -28,29 +27,37 @@ class UnPaidBills extends React.Component {
   }
 
   handlePay = (e) => {
-    const paymentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
     const {param} = e.target.dataset;
     const referenceCode = generateRandomString(8, '#aA');
-    this.setState({referenceCode, paymentDate, billID: param});
+    this.setState({referenceCode, billID: param});
   };
 
   callBack = () => {
-    $('#myModal').hide();
-    $('.modal-backdrop').hide();
-
-    if (this.state.billID) {
-      this.props.updateBillPaymentStatus(this.state.billID, this.state.paymentDate).then(() => {
-        if (this.props.billUpdated) {
-          this.props.getTenantBills().then(() => {
-            if (this.props.bills) {
-              const unpaidBills = this.props.bills.filter((bill) => {
-                return !bill.payment_status
+    if (this.state.billID && this.state.referenceCode) {
+      const {billID, referenceCode} = this.state;
+      paystack.transaction.verify(referenceCode,  (error, body) => {
+        if (body.data.status === 'success') {
+          this.props.setTransactionStatus('success');
+          $('#myModal').hide();
+          $('.modal-backdrop').hide();
+          this.props.updateBillPaymentStatus(billID, body.data).then(() => {
+            if (this.props.billUpdated) {
+              this.props.getTenantBills().then(() => {
+                if (this.props.bills) {
+                  const unpaidBills = this.props.bills.filter((bill) => {
+                    return !bill.payment_status
+                  });
+                  this.setState({unpaidBills})
+                }
               });
-              this.setState({unpaidBills})
             }
           });
+        } else {
+          this.props.setTransactionStatus('failed');
+          $('#myModal').hide();
+          $('.modal-backdrop').hide();
         }
-      })
+      });
     }
   };
 
@@ -138,7 +145,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateBillPaymentStatus: (id, date) => dispatch(updateBillPaymentStatus(id, date))
+    updateBillPaymentStatus: (id, payload) => dispatch(updateBillPaymentStatus(id, payload)),
+    setTransactionStatus: (transactionStatus) => dispatch(setTransactionStatus(transactionStatus))
   }
 };
 

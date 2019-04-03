@@ -8,17 +8,29 @@ import Navbar from "../components/Navbar";
 import {connect} from "react-redux";
 import queryString from 'query-string';
 import {getProperty} from "../redux/actions/properties";
+import {restStickyNavBar} from "../navHelpers";
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
+// import OwlCarousel from 'react-owl-carousel';
+// import 'owl.carousel/dist/assets/owl.carousel.css';
+// import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+const $ = window.$;
 
 class PropertyDetail extends React.Component {
   state = {
     singleProperty: {},
-    propertyImages: []
+    propertyImages: [],
+    showGallery: true,
   };
 
   componentWillMount() {
     const parsed = queryString.parse(window.location.search);
     this.props.getProperty(parsed.propId)
+  }
+
+  componentDidMount() {
+    restStickyNavBar();
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -27,7 +39,7 @@ class PropertyDetail extends React.Component {
 
     if (singleProperty) {
       propertyImages = singleProperty.property_images.filter((image) => {
-        return image.tag === 'thumbnail'
+        return image.tag === 'gallery'
       });
       this.setState({
         singleProperty,
@@ -36,8 +48,22 @@ class PropertyDetail extends React.Component {
     }
   }
 
+  toggleGallery = () => {
+    this.setState({showGallery: true})
+  };
+
+  toggleFloorPlan = () => {
+    this.setState({showGallery: false})
+  };
+
   render() {
     const {singleProperty, propertyImages} = this.state;
+    const images = propertyImages && propertyImages.map((image) => {
+      return {
+        original: image.image_details.url
+      }
+    });
+
     return (
       <Aux>
         <Navbar/>
@@ -74,14 +100,20 @@ class PropertyDetail extends React.Component {
                 </div>
               </div>
               <div className="col-lg-7">
-                {/*<div className="features-img features-right text-right">*/}
-                {/*<img src="images/online-world.svg" alt="macbook image" className="img-fluid" />*/}
-                {/*</div>*/}
-                <div className="property-slider owl-carousel owl-theme">
+                <div className="gallery-nav">
+                  <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                      <a className="nav-link active" role="button" onClick={this.toggleGallery}>Gallery</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" role="button" onClick={this.toggleFloorPlan}>Floor Plan</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
                   {
-                    propertyImages && propertyImages.map((image) => {
-                      return <div> <img src={image.image_details.url} alt=""/> </div>
-                    })
+                    this.state.showGallery ? <ImageGallery items={images}/> :
+                      <div><img src={images[0].original} width="550" height="550" alt=""/></div>
                   }
                 </div>
               </div>

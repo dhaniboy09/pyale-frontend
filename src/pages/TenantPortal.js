@@ -7,6 +7,7 @@ import {loadUser} from "../redux/actions/authActions";
 import Footer from "../components/Footer";
 import SocialMedia from "../components/SocialMedia";
 import FooterLinks from "../components/FooterLinks";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class TenantPortal extends React.Component {
@@ -15,13 +16,17 @@ class TenantPortal extends React.Component {
   };
 
   componentWillMount() {
-    if(!this.props.user) {
+    if (!this.props.user) {
       this.props.loadUser().then(() => {
         if (this.props.user && !this.props.user.is_previously_logged_in) {
           this.props.history.push('/password_change')
         }
       })
     }
+  }
+
+  componentDidMount() {
+    restStickyNavBar()
   }
 
   render() {

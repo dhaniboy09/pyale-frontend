@@ -1,6 +1,7 @@
 import axios from 'axios';
 import constants from '../../appConstants'
 import {setAuthHeader} from '../../actionHelpers'
+import moment from 'moment'
 
 
 export const getTenantDocuments = () => {
@@ -41,20 +42,38 @@ export const getTenantLettings = () => {
   }
 };
 
-export const updateBillPaymentStatus = (id, date) => {
+export const updateBillPaymentStatus = (id, payload) => {
   return (dispatch, getState) => {
     const headers = setAuthHeader(getState);
     return axios.patch(
       `${constants.LOCAL_HOST}/api/v1/tenant/${id}/bills/update/`,
-      {'payment_status': true, 'date_paid': date},
+      {
+        'payment_status': true,
+        'transaction_date': moment(payload.transaction_date).format('MMMM Do YYYY, h:mm:ss a'),
+        'transaction_reference': payload.reference,
+        'is_mobile': payload.log.mobile,
+        'bank': payload.authorization.bank,
+        'card_type': payload.authorization.card_type,
+        'last4': payload.authorization.last4,
+        'card_expiry_month': payload.authorization.exp_month,
+        'card_expiry_year': payload.authorization.exp_year,
+        'card_brand': payload.authorization.brand,
+        'transaction_time': payload.log.time_spent,
+        'transaction_id': payload.id
+      },
       {headers}
-      ).then((res) => {
-        dispatch({type: 'TENANT_BILLS_UPDATE_SUCCESS'})
-      }).catch((error) => {
-        console.log(error)
-      })
+    ).then((res) => {
+      dispatch({type: 'TENANT_BILLS_UPDATE_SUCCESS'})
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 };
+
+export const setTransactionStatus = (transactionStatus) => ({
+  type: 'TRANSACTION_STATUS_UPDATE',
+  transactionStatus
+});
 
 
 

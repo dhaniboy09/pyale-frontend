@@ -27,6 +27,7 @@
 /* ==========
    1.BASIC
    ========== */
+
 @font-face {
   font-family: 'Bauhaus';
   src: url("../fonts/Bauhaus-93-Regular.ttf");
@@ -209,7 +210,7 @@ b {
 .detail-section-title {
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 0px;
+    margin-bottom: 3px;
     margin-top: -30px;
     line-height: 1;
     font-size: 1.75rem;
@@ -228,7 +229,7 @@ b {
     height: 2px;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     background-color: #fb3e3e;
 }
 
@@ -1605,4 +1606,14 @@ ul.letting-summary {
 
 .thead-red {
     background-color: #fb3e3e !important;
+}
+
+.nav-tabs {
+    border-bottom: unset;
+}
+
+.gallery-nav a {
+    color: #212529;
+    cursor: pointer;
+    margin-bottom: 4px;
 }

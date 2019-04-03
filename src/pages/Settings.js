@@ -4,6 +4,7 @@ import Aux from '../hoc/Aux_';
 import Navbar from '../components/Navbar';
 import {Redirect} from "react-router-dom";
 import {changeEmail, changePassword} from "../redux/actions/authActions";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class TenantDocument extends React.Component {
@@ -14,6 +15,10 @@ class TenantDocument extends React.Component {
     email: "",
     isValidEmail: true
   };
+
+  componentDidMount() {
+    restStickyNavBar()
+  }
 
   handleChange = (e) => {
     this.setState({
