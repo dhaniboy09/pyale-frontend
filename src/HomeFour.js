@@ -1,8 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import SocialMedia from './components/SocialMedia';
 import Footer from './components/Footer';
-import FooterLinks from './components/FooterLinks';
 import Aux from './hoc/Aux_';
 import HomeNavBar from "./components/HomeNavBar";
 import {connect} from "react-redux";
@@ -10,6 +8,7 @@ import Commercial from "./components/Commercial";
 import Residential from "./components/Residential";
 import {loadProperties} from "./redux/actions/properties";
 import Retail from "./components/Retail";
+import {restStickyNavBar} from "./navHelpers";
 
 class HomeFour extends React.Component {
   state = {
@@ -42,6 +41,10 @@ class HomeFour extends React.Component {
     });
   }
 
+  componentDidMount() {
+    restStickyNavBar()
+  }
+
   render() {
     const {isAuthenticated} = this.props;
     return (
@@ -55,7 +58,7 @@ class HomeFour extends React.Component {
             <div className="display-table-cell">
               <div className="container">
                 <div className="row vertical-content">
-                  <div className="col-lg-8 text-white text-center margin-t-5">
+                  <div className="col-lg-12 text-white text-center margin-t-5">
                     <h2 className="home-title">We Build. We Lease. We Rent. </h2>
                     <p className="padding-t-15 home-desc">
                       Pyale Properties leases and rents commercial and residential properties at
@@ -71,9 +74,7 @@ class HomeFour extends React.Component {
         <Commercial properties={this.state.commercial}/>
         <Residential properties={this.state.residential}/>
         <Retail properties={this.state.retail}/>
-        <SocialMedia/>
         <Footer/>
-        <FooterLinks/>
       </Aux>
     );
   }

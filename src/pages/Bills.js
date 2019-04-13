@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar";
 import {connect} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
 import Footer from "../components/Footer";
-import SocialMedia from "../components/SocialMedia";
-import FooterLinks from "../components/FooterLinks";
 import {getTenantBills} from "../redux/actions/tenant";
 import PaidBills from "../components/PaidBills";
 import UnPaidBills from "../components/UnPaidBills";
@@ -65,9 +63,7 @@ class Bills extends React.Component {
             </div>
           </div>
         </section>
-        <SocialMedia/>
         <Footer/>
-        <FooterLinks/>
       </Aux>
     );
   }

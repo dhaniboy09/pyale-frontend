@@ -6,9 +6,7 @@ import {getTenantDocuments} from "../redux/actions/tenant";
 import {Redirect} from "react-router-dom";
 import {DocumentItem} from "../components/DocumentItem";
 import {Alert} from "../components/Alert";
-import SocialMedia from "../components/SocialMedia";
 import Footer from "../components/Footer";
-import FooterLinks from "../components/FooterLinks";
 import {restStickyNavBar} from "../navHelpers";
 
 
@@ -79,9 +77,7 @@ class TenantDocument extends React.Component {
               }
           </div>
         </section>
-        <SocialMedia/>
         <Footer/>
-        <FooterLinks/>
       </Aux>
     )
   }

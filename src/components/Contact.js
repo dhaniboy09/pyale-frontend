@@ -1,11 +1,10 @@
 import React from 'react';
-import SocialMedia from "./SocialMedia";
 import Footer from "./Footer";
-import FooterLinks from "./FooterLinks";
 import Aux from '../hoc/Aux_'
 import Navbar from "./Navbar"
 import {connect} from "react-redux";
 import {sendEnquiryEmail} from "../redux/actions/email";
+import {restStickyNavBar} from "../navHelpers";
 
 
 class Contact extends React.Component {
@@ -16,6 +15,10 @@ class Contact extends React.Component {
     email: "",
     isLoading: false
   };
+
+  componentDidMount() {
+    restStickyNavBar()
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -53,9 +56,6 @@ class Contact extends React.Component {
               <div className="col-lg-8 offset-lg-2">
                 <h1 className="section-title text-center">Get In Touch</h1>
                 <div className="section-title-border margin-t-20"></div>
-                {/*<p className="section-subtitle text-muted text-center font-secondary padding-t-30">We thrive when coming*/}
-                {/*up with innovative ideas but also understand that a smart concept should be supported with measurable*/}
-                {/*results.</p>*/}
               </div>
             </div>
             <div className="row">
@@ -154,9 +154,7 @@ class Contact extends React.Component {
             </div>
           </div>
         </section>
-        <SocialMedia/>
         <Footer/>
-        <FooterLinks/>
       </Aux>
     );
   }

@@ -6,7 +6,7 @@ import {generateRandomString} from '../helpers'
 import {updateBillPaymentStatus, setTransactionStatus} from "../redux/actions/tenant";
 
 const $ = window.$;
-const paystack = require('paystack')('sk_test_05e51b24d45dc368ea913c352f69ae1c36703e69');
+const paystack = require('paystack')(process.env.REACT_APP_PAYSTACK_SECRET_KEY);
 
 class UnPaidBills extends React.Component {
   state = {
@@ -28,7 +28,7 @@ class UnPaidBills extends React.Component {
 
   handlePay = (e) => {
     const {param} = e.target.dataset;
-    const referenceCode = generateRandomString(8, '#aA');
+    const referenceCode = generateRandomString(8, '#A');
     this.setState({referenceCode, billID: param});
   };
 
@@ -121,13 +121,12 @@ class UnPaidBills extends React.Component {
                 disabled={true}
                 embed={true}
                 reference={this.state.referenceCode}
-                email="shani4ril@yahoo.coom"
+                email={this.props.user.email}
                 amount={10000}
-                paystackkey="pk_test_b3020aa5212ce41356e048371249d4dc75b21e77"
+                paystackkey={process.env.REACT_APP_PAYSTACK_PUBLIC_ID}
                 tag="button"
               />
             </div>
-
           </div>
         </div>
       </div>
@@ -139,7 +138,8 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     billUpdated: state.tenantReset.billUpdated,
-    bills: state.tenant.bills
+    bills: state.tenant.bills,
+    user: state.auth.user
   }
 };
 

@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import {Redirect} from "react-router-dom";
 import {changeEmail, changePassword} from "../redux/actions/authActions";
 import {restStickyNavBar} from "../navHelpers";
+import Footer from "../components/Footer";
 
 
 class TenantDocument extends React.Component {
@@ -204,6 +205,7 @@ class TenantDocument extends React.Component {
             </div>
           </div>
         </section>
+        <Footer/>
       </Aux>
     )
   }

@@ -20,6 +20,7 @@ import Contact from "./components/Contact";
 import TenantContact from "./pages/TenantContact";
 import MyLetting from "./pages/MyLetting";
 
+require('dotenv').config();
 
 class Root extends React.Component {
 

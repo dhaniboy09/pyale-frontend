@@ -29,8 +29,8 @@
    ========== */
 
 @font-face {
-  font-family: 'Bauhaus';
-  src: url("../fonts/Bauhaus-93-Regular.ttf");
+    font-family: 'Bauhaus';
+    src: url("../fonts/Bauhaus-93-Regular.ttf");
 }
 
 body {
@@ -39,6 +39,17 @@ body {
     position: relative;
 }
 
+html, body {
+    height: 100%;
+}
+
+#root {
+   min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+}
 a,
 a:hover,
 a:focus,
@@ -188,7 +199,6 @@ b {
 
 .section {
     padding-top: 80px;
-    padding-bottom: 80px;
     position: relative;
 }
 
@@ -390,7 +400,7 @@ iframe {
 }
 
 .navbar-nav {
-    margin-left: 50px;
+    margin-left: 30px;
     border-bottom: none;
 }
 
@@ -723,7 +733,7 @@ iframe {
      6. SERVICES
 ========================================*/
 
-.services-box .document-box{
+.services-box .document-box {
     padding: 15px 10px;
 }
 
@@ -1028,7 +1038,7 @@ textarea.form-control {
 }
 
 .cta {
-    padding: 20px 0;
+    margin-bottom: 130px;
 }
 
 .social-icon:hover i {
@@ -1036,12 +1046,14 @@ textarea.form-control {
 }
 
 .footer {
-    padding: 50px 0;
+    padding: 65px 0;
     background-image: url("../images/footer/bg-footer.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom;
-    margin-bottom: 20px;
+    position: relative;
+    clear: both;
+    margin-top: 200px;
     /*background-color: #272a33;*/
 
 }
@@ -1107,6 +1119,9 @@ textarea.form-control {
 .footer-alt {
     padding: 15px 0;
     background-color: #2e313a;
+    position: absolute;
+    width: 100%;
+    top: 850px;
 }
 
 .copy-rights {
@@ -1242,8 +1257,11 @@ textarea.form-control {
         line-height: 38px;
     }
 
-    .vertical-content {
-        display: inherit;
+    /*.vertical-content {*/
+    /*display: inherit;*/
+    /*}*/
+    .navbar-custom .navbar-brand {
+        font-size: 2.0rem;
     }
 
     .team-box {
@@ -1551,11 +1569,11 @@ ul.pattern .color8 {
     font-size: 14px;
 }
 
-.filter-nav a{
+.filter-nav a {
     color: #212529;
 }
 
-.property-title h5{
+.property-title h5 {
     cursor: pointer;
     color: #a8aeb4;
 }
@@ -1616,4 +1634,10 @@ ul.letting-summary {
     color: #212529;
     cursor: pointer;
     margin-bottom: 4px;
+}
+
+.copyrights {
+    background: #0b0b0b;
+    padding: 10px;
+    margin-top: 10px;
 }

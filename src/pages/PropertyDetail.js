@@ -120,9 +120,7 @@ class PropertyDetail extends React.Component {
             </div>
           </div>
         </section>
-        <SocialMedia/>
         <Footer/>
-        <FooterLinks/>
       </Aux>
     );
   }
