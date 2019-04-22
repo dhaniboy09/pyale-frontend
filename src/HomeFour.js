@@ -23,13 +23,13 @@ class HomeFour extends React.Component {
       const {allProperties} = this.props;
       if (allProperties) {
         const retail = allProperties.filter((property) => {
-          return property.category === 'retail'
+          return property.category === 'retail' && property.home_page && property.active
         });
         const commercial = allProperties.filter((property) => {
-          return property.category === 'commercial'
+          return property.category === 'commercial' && property.home_page && property.active
         });
         const residential = allProperties.filter((property) => {
-          return property.category === 'residential'
+          return property.category === 'residential' && property.home_page && property.active
         });
 
         this.setState({

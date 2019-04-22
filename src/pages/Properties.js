@@ -63,7 +63,9 @@ class Properties extends React.Component {
   };
 
   render() {
-    const {allProperties} = this.props;
+    console.log(this.props.allProperties, "all");
+    let activeProperties = this.props.allProperties.filter((property) => { return property.active });
+    console.log(activeProperties, "active");
     return (
       <div>
         <Aux>
@@ -202,7 +204,7 @@ class Properties extends React.Component {
               <div className="row margin-t-30">
 
                 {
-                  allProperties && allProperties.map((property) => {
+                  activeProperties && activeProperties.map((property) => {
                     return (
                       <div className="col-lg-3" key={property.id}>
                         <div className="blog-box margin-t-30 hover-effect">
