@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo $HEROKU_PARENT_APP_NAME
+export REACT_APP_API_URL=https://HEROKU_PARENT_APP_NAME.herokuapp.com/
