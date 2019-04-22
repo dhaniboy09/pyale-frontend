@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import SocialMedia from '../components/SocialMedia';
 import Footer from '../components/Footer';
-import FooterLinks from '../components/FooterLinks';
 import Aux from '../hoc/Aux_'
 import Navbar from "../components/Navbar";
 import {connect} from "react-redux";
@@ -11,17 +9,14 @@ import {getProperty} from "../redux/actions/properties";
 import {restStickyNavBar} from "../navHelpers";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-// import OwlCarousel from 'react-owl-carousel';
-// import 'owl.carousel/dist/assets/owl.carousel.css';
-// import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-const $ = window.$;
 
 class PropertyDetail extends React.Component {
   state = {
     singleProperty: {},
     propertyImages: [],
     showGallery: true,
+    floorPlanImage: []
   };
 
   componentWillMount() {
@@ -35,15 +30,19 @@ class PropertyDetail extends React.Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     const {singleProperty} = nextProps;
-    let propertyImages;
+    let propertyImages, floorPlanImage;
 
     if (singleProperty) {
       propertyImages = singleProperty.property_images.filter((image) => {
         return image.tag === 'gallery'
       });
+      floorPlanImage = singleProperty.property_images.filter((image) => {
+        return image.tag === 'floorplan'
+      });
       this.setState({
         singleProperty,
-        propertyImages
+        propertyImages,
+        floorPlanImage
       })
     }
   }
@@ -57,7 +56,7 @@ class PropertyDetail extends React.Component {
   };
 
   render() {
-    const {singleProperty, propertyImages} = this.state;
+    const {singleProperty, propertyImages, floorPlanImage} = this.state;
     const images = propertyImages && propertyImages.map((image) => {
       return {
         original: image.image_details.url
@@ -105,15 +104,19 @@ class PropertyDetail extends React.Component {
                     <li className="nav-item">
                       <a className="nav-link active" role="button" onClick={this.toggleGallery}>Gallery</a>
                     </li>
-                    <li className="nav-item">
-                      <a className="nav-link" role="button" onClick={this.toggleFloorPlan}>Floor Plan</a>
-                    </li>
+                    {
+                      floorPlanImage.length > 0 ? (
+                        <li className="nav-item">
+                          <a className="nav-link" role="button" onClick={this.toggleFloorPlan}>Floor Plan</a>
+                        </li>
+                      ) : null
+                    }
                   </ul>
                 </div>
                 <div>
                   {
                     this.state.showGallery ? <ImageGallery items={images}/> :
-                      <div><img src={images[0].original} width="550" height="550" alt=""/></div>
+                      <div><img src={floorPlanImage} width="550" height="550" alt=""/></div>
                   }
                 </div>
               </div>

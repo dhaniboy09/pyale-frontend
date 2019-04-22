@@ -20,9 +20,10 @@ class Commercial extends React.Component {
               <h1 className="section-title text-center">Commercial Properties</h1>
               <div className="section-title-border margin-t-20"></div>
               <p className="section-subtitle text-muted text-center font-secondary padding-t-30">
-                Check our latest properties available for sale. We offer both short and long term leases at
-                competitive rates. Your lease is managed via a dedicated tenant portal, which provides
-                an easy way to pay bills, access tenancy documents, raise issues and much more.
+                {/*Check our latest properties available for sale. We offer both short and long term leases at*/}
+                {/*competitive rates. Your lease is managed via a dedicated tenant portal, which provides*/}
+                {/*an easy way to pay bills, access tenancy documents, raise issues and much more.*/}
+                Commercial Properties Available Soon!
               </p>
             </div>
           </div>

@@ -44,12 +44,13 @@ html, body {
 }
 
 #root {
-   min-height: 100%;
+    min-height: 100%;
 }
 
 #main {
     overflow: auto;
 }
+
 a,
 a:hover,
 a:focus,
@@ -481,7 +482,7 @@ iframe {
   =====================================*/
 
 .bg-home {
-    background: url("../images/bg-home.jpg");
+    background: url("../images/home-bg.JPG");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -803,7 +804,7 @@ iframe {
 ======================================*/
 
 .bg-web-desc {
-    background: url("../images/img-1.jpg");
+    background: url("../images/header-img.JPG");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -1053,7 +1054,7 @@ textarea.form-control {
     background-position: bottom;
     position: relative;
     clear: both;
-    margin-top: 200px;
+    margin-top: 300px;
     /*background-color: #272a33;*/
 
 }
@@ -1339,6 +1340,39 @@ textarea.form-control {
     .navbar-collapse {
         max-height: 200px;
         overflow-y: auto;
+    }
+}
+
+@media only screen
+and (min-width: 1024px)
+and (max-height: 1366px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 1.5) {
+    /*.footer {*/
+    /*margin-top: 550px;*/
+    /*}*/
+    .navbar-custom {
+        background-color: transparent !important;
+    }
+
+    .is-sticky > .navbar-custom {
+        background-color: #272a33 !important;
+    }
+
+    #features > .container {
+        margin-bottom: 300px;
+    }
+
+    #contact > .container {
+        margin-bottom: 300px;
+    }
+
+    #services > .container {
+        margin-bottom: 300px;
+    }
+
+    #team > .container {
+        margin-bottom: 450px;
     }
 }
 

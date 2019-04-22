@@ -19,7 +19,7 @@ class Residential extends React.Component {
               <h1 className="section-title text-center">Residential Properties</h1>
               <div className="section-title-border margin-t-20"></div>
               <p className="section-subtitle text-muted text-center font-secondary padding-t-30">
-                Explore our available rentals. Our rates are competitive and you can pay monthly, quarterly,
+                Explore our residential properties. Our rates are competitive and you can pay monthly, quarterly,
                 or annually. You also gain access to our dedicated tenant portal, which provides
                 an easy way to pay bills, access relevant documents, raise issues and much more.
               </p>

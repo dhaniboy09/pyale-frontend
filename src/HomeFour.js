@@ -71,8 +71,8 @@ class HomeFour extends React.Component {
             </div>
           </div>
         </section>
-        <Commercial properties={this.state.commercial}/>
         <Residential properties={this.state.residential}/>
+        <Commercial properties={this.state.commercial}/>
         <Retail properties={this.state.retail}/>
         <Footer/>
       </Aux>
