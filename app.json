@@ -1,7 +1,16 @@
 {
   "name": "pyale-frontend",
-  "scripts": {},
-  "env": {},
+  "scripts": {
+    "postdeploy": "export REACT_APP_API_URL=$HEROKU_APP_NAME.herokuapp.com"
+  },
+  "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    }
+  },
   "formation": {
     "web": {
       "quantity": 1
