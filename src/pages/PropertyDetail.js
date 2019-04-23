@@ -72,30 +72,34 @@ class PropertyDetail extends React.Component {
         <section className="section" id="features">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8 offset-lg-2">
+              <div className="col-lg-8 offset-lg-2 margin-b-30">
                 <h1 className="detail-section-title text-center">{singleProperty && singleProperty.name}</h1>
                 <div className="detail-section-title-border margin-t-20"></div>
               </div>
             </div>
 
-            <div className="row vertical-content">
+            <div className="row">
               <div className="col-lg-5">
                 <div className="features-box">
-                  <h3>A digital web design studio creating modern & engaging online experiences</h3>
-                  <p className="text-muted web-desc">Separated they live in Bookmarksgrove right at
-                    the coast of the
-                    Semantics, a large language ocean. A small river named Duden flows by their
-                    place and supplies it
-                    with the necessary regelialia.</p>
+                  <h3>The Chevy View Apartments is a modern three (3) storey apartment building located in the
+                  heart of Lagos</h3>
+                  <p className="text-muted web-desc">
+                    These spacious modern apartments are designed to give residents comfort and are built
+                    to the safest standards in a serene and secure environment.<br/><br/>
+                    Built with high standards and a stylish finishing, this property is located off chevron round about
+                    at plot 24 &amp; 25, Block C1, Ojomu Chieftaincy Family Land, Ajiran Eti-osa, Lekki, Lagos
+                    In addition to a spacious car park and gorgeous transparent roof at the lobby, each apartment
+                    contains:
+                  </p>
                   <ul className="text-muted list-unstyled margin-t-30 features-item-list">
-                    <li className="">We put a lot of effort in design.</li>
-                    <li className="">The most important ingredient of successful website.</li>
-                    <li className="">Sed ut perspiciatis unde omnis iste natus error sit.</li>
-                    <li className="">Submit Your Orgnization.</li>
+                    <li className="">Master En-Suite Bedroom</li>
+                    <li className="">Dining area with pantry</li>
+                    <li className="">Modern living room</li>
+                    <li className="">Full unit kitchen including an oven, gas burner, extractor fan, central boiler
+                    pantry and more</li>
+                    <li className="">Air conditioning points in all the rooms</li>
+                    <li className="">2 bedrooms with a shared toilet/bathroom and guest toilet</li>
                   </ul>
-                  <Link to="JavaScript:Void(0);"
-                        className="btn btn-custom margin-t-30 waves-effect waves-light">Learn
-                    More <i className="mdi mdi-arrow-right"></i></Link>
                 </div>
               </div>
               <div className="col-lg-7">
