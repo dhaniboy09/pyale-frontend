@@ -12,7 +12,8 @@ class UnPaidBills extends React.Component {
   state = {
     referenceCode: "",
     billID: null,
-    unpaidBills: []
+    unpaidBills: [],
+    amount: 0
   };
 
   componentWillMount() {
@@ -27,9 +28,14 @@ class UnPaidBills extends React.Component {
   }
 
   handlePay = (e) => {
-    const {param} = e.target.dataset;
+    const {param, amount} = e.target.dataset;
     const referenceCode = generateRandomString(8, '#A');
-    this.setState({referenceCode, billID: param});
+    let newAmount = this.convertAmountToKobo(amount);
+    this.setState({referenceCode, billID: param, amount: newAmount});
+  };
+
+  convertAmountToKobo = (amount) => {
+    return amount * 100
   };
 
   callBack = () => {
@@ -98,6 +104,7 @@ class UnPaidBills extends React.Component {
                         data-target="#myModal"
                         onClick={this.handlePay}
                         data-param={item.id}
+                        data-amount={item.amount}
                       >
                         Pay
                       </button>
@@ -122,7 +129,7 @@ class UnPaidBills extends React.Component {
                 embed={true}
                 reference={this.state.referenceCode}
                 email={this.props.user.email}
-                amount={10000}
+                amount={this.state.amount}
                 paystackkey={process.env.REACT_APP_PAYSTACK_PUBLIC_ID}
                 tag="button"
               />

@@ -14,6 +14,7 @@ class UnPaidBills extends React.Component {
         const paidBills = this.props.bills.filter((bill) => {
           return bill.payment_status
         });
+        console.log(paidBills);
         this.setState({paidBills})
       }
     });
