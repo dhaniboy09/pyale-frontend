@@ -5,7 +5,7 @@ export const DocumentItem = ({document}) =>
     {
       document && document.map((item) => {
         return (
-          <div className="col-lg-3 margin-t-20">
+          <div className="col-lg-3 margin-t-20" key={item.id}>
             <div className="documents-box text-center hover-effect">
               <i className="pe-7s-file text-custom"></i>
               <h4 className="padding-t-15 portal-heading">

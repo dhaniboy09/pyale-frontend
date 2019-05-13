@@ -34,7 +34,7 @@ class Residential extends React.Component {
                     <div className="blog-box margin-t-30 hover-effect">
                       {property.property_images.map((imageItem) => {
                           if (imageItem.tag === "thumbnail") {
-                            return <img src={imageItem.image_details && imageItem.image_details.url}
+                            return <img src={imageItem.image && imageItem.image}
                                         className="img-fluid" alt="" key={imageItem.id}/>
                           }
                         })}
@@ -44,9 +44,9 @@ class Residential extends React.Component {
                         </h4>
                         <p className="text-muted">
                            {
-                            property.description.length > 90 ?
-                            property.description.substring(0, 90) + ' ...' :
-                            property.description
+                            property.summary > 90 ?
+                            property.summary.substring(0, 90) + ' ...' :
+                            property.summary
                           }
                         </p>
                         <div className="mt-3 view-details">

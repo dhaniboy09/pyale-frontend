@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import Footer from '../components/Footer';
 import Aux from '../hoc/Aux_'
 import Navbar from "../components/Navbar";
@@ -9,7 +8,7 @@ import {getProperty} from "../redux/actions/properties";
 import {restStickyNavBar} from "../navHelpers";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 
 
 class PropertyDetail extends React.Component {
