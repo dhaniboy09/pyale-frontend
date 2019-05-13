@@ -9,6 +9,7 @@ import {getProperty} from "../redux/actions/properties";
 import {restStickyNavBar} from "../navHelpers";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 
 class PropertyDetail extends React.Component {
@@ -55,14 +56,15 @@ class PropertyDetail extends React.Component {
     this.setState({showGallery: false})
   };
 
+
   render() {
     const {singleProperty, propertyImages, floorPlanImage} = this.state;
     const images = propertyImages && propertyImages.map((image) => {
       return {
-        original: image.image_details.url
+        original: image.image
       }
     });
-
+    const description = ReactHtmlParser(singleProperty.description);
     return (
       <Aux>
         <Navbar/>
@@ -79,30 +81,18 @@ class PropertyDetail extends React.Component {
             </div>
 
             <div className="row">
-              <div className="col-lg-5">
+              <div className="col-lg-12">
                 <div className="features-box">
-                  <h3>The Chevy View Apartments is a modern three (3) storey apartment building located in the
-                  heart of Lagos</h3>
-                  <p className="text-muted web-desc">
-                    These spacious modern apartments are designed to give residents comfort and are built
-                    to the safest standards in a serene and secure environment.<br/><br/>
-                    Built with high standards and a stylish finishing, this property is located off chevron round about
-                    at plot 24 &amp; 25, Block C1, Ojomu Chieftaincy Family Land, Ajiran Eti-osa, Lekki, Lagos
-                    In addition to a spacious car park and gorgeous transparent roof at the lobby, each apartment
-                    contains:
-                  </p>
-                  <ul className="text-muted list-unstyled margin-t-30 features-item-list">
-                    <li className="">Master En-Suite Bedroom</li>
-                    <li className="">Dining area with pantry</li>
-                    <li className="">Modern living room</li>
-                    <li className="">Full unit kitchen including an oven, gas burner, extractor fan, central boiler
-                    pantry and more</li>
-                    <li className="">Air conditioning points in all the rooms</li>
-                    <li className="">2 bedrooms with a shared toilet/bathroom and guest toilet</li>
-                  </ul>
+                  <h3>{singleProperty.summary}</h3>
+                  <div className="text-muted web-desc">
+                    {description}
+                  </div>
+                  <div className="margin-t-30"></div>
                 </div>
               </div>
-              <div className="col-lg-7">
+            </div>
+            <div className="row">
+              <div className="col-lg-12">
                 <div className="gallery-nav">
                   <ul className="nav nav-tabs">
                     <li className="nav-item">
