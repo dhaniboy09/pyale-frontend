@@ -4,6 +4,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {createPasswordResetToken} from "../redux/actions/authActions";
 import {FormErrors} from "../components/FormErrors";
+import {emailRegex} from "../appConstants";
 
 class PasswordForget extends React.Component {
   state = {
@@ -26,10 +27,7 @@ class PasswordForget extends React.Component {
 
   validateEmail = (id, email) => {
     let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
-    let re = /\S+@\S+\.\S+/;
-
-    emailValid = re.test(email);
+    let emailValid = emailRegex.test(email);
     fieldValidationErrors.email = emailValid ? '' : 'Invalid Email';
 
     this.setState({

@@ -7,3 +7,31 @@ export const generateRandomString = (length, chars) => {
     for (let i = length; i > 0; --i) result += mask[Math.round(Math.random() * (mask.length - 1))];
     return result;
 };
+
+export const containsEmptyValue = (fields) => {
+    let hasEmpty = false;
+    Object.values(fields).forEach((val) => {
+      val.length === 0 && (hasEmpty = true)
+    });
+    return hasEmpty
+};
+
+export const sanitizeUserInput = (fields) => {
+    Object.keys(fields).forEach((key) => {
+        fields[key] = sanitize(fields[key])
+    });
+};
+
+export const sanitize = (string) => {
+  const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+  };
+  const reg = /[&<>"'/]/ig;
+  return string.replace(reg, (match)=>(map[match]));
+};
+
