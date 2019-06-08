@@ -1,13 +1,12 @@
 import React from 'react';
-import SocialMedia from "../components/SocialMedia";
 import Footer from "../components/Footer";
-import FooterLinks from "../components/FooterLinks";
 import Aux from '../hoc/Aux_'
 import Navbar from "../components/Navbar"
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {sendSupportEmail} from "../redux/actions/email";
 import {restStickyNavBar} from "../navHelpers";
+import {containsEmptyValue, sanitizeUserInput} from "../helpers";
 
 
 class TenantContact extends React.Component {
@@ -17,7 +16,8 @@ class TenantContact extends React.Component {
     first_name: this.props.user.first_name,
     last_name: this.props.user.last_name,
     email: this.props.user.email,
-    isLoading: false
+    isLoading: false,
+    errors: ""
   };
 
   componentDidMount() {
@@ -30,22 +30,41 @@ class TenantContact extends React.Component {
     })
   };
 
+  validateForm = () => {
+    let {errors, message, subject} = this.state;
+    const formFields = {message, subject};
+
+    // Sanitize form inputs
+    sanitizeUserInput(formFields);
+
+    if (containsEmptyValue(formFields)) {
+      errors = 'All Fields are required';
+      this.setState({errors});
+      return true
+    }
+    return false
+  };
+
+
   handleSendEmail = (e) => {
     e.preventDefault();
-    this.setState({isLoading: true});
-    this.props.sendSupportEmail(this.state).then(() => {
-      if (this.props.supportEmailSent) {
-        this.setState({
-          message: "",
-          subject: "",
-          isLoading: false
-        })
-      }
-    })
+    if (!this.validateForm()) {
+      this.setState({isLoading: true});
+      this.props.sendSupportEmail(this.state).then(() => {
+        if (this.props.supportEmailSent) {
+          this.setState({
+            message: "",
+            subject: "",
+            isLoading: false
+          })
+        }
+      })
+    }
   };
 
   render() {
     const {isAuthenticated, supportEmailSent} = this.props;
+    const {errors} = this.state;
     if (!isAuthenticated) {
       return <Redirect to="/login"/>
     }
@@ -83,6 +102,7 @@ class TenantContact extends React.Component {
                               Email Sent Successfully
                             </div>
                           }
+                          {errors.length > 0 && <div className="alert alert-danger">{errors}</div>}
                           <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                               <label htmlFor="email">Subject:</label>
