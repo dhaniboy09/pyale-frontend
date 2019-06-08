@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import {Loader} from "./Loader";
 
 
 class Commercial extends React.Component {
@@ -20,11 +21,12 @@ class Commercial extends React.Component {
               <h1 className="section-title text-center">Commercial Properties</h1>
               <div className="section-title-border margin-t-20"></div>
               <p className="section-subtitle text-muted text-center font-secondary padding-t-30">
-                {/*Check our latest properties available for sale. We offer both short and long term leases at*/}
-                {/*competitive rates. Your lease is managed via a dedicated tenant portal, which provides*/}
-                {/*an easy way to pay bills, access tenancy documents, raise issues and much more.*/}
-                Commercial Properties Available Soon!
+                Our modern commercial properties are state-of-the-art and ideal for both large and small scale businesses.
+                We offer some of the most competitive rates on the market.
               </p>
+              <div className="text-center margin-t-50">
+                <Loader isLoading={this.props.loading}/>
+              </div>
             </div>
           </div>
 
