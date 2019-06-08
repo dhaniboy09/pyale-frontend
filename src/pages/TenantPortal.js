@@ -5,8 +5,6 @@ import {connect} from "react-redux";
 import {Link, Redirect, withRouter} from "react-router-dom";
 import {loadUser} from "../redux/actions/authActions";
 import Footer from "../components/Footer";
-import SocialMedia from "../components/SocialMedia";
-import FooterLinks from "../components/FooterLinks";
 import {restStickyNavBar} from "../navHelpers";
 
 

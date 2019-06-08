@@ -14,12 +14,15 @@ class HomeFour extends React.Component {
   state = {
     retail: [],
     commercial: [],
-    residential: []
+    residential: [],
+    isLoading: false
   };
 
 
   componentWillMount() {
+    this.setState({isLoading: true});
     this.props.loadProperties().then(() => {
+      this.setState({isLoading: false});
       const {allProperties} = this.props;
       if (allProperties) {
         const retail = allProperties.filter((property) => {
@@ -71,9 +74,9 @@ class HomeFour extends React.Component {
             </div>
           </div>
         </section>
-        <Residential properties={this.state.residential}/>
-        <Commercial properties={this.state.commercial}/>
-        <Retail properties={this.state.retail}/>
+        <Residential properties={this.state.residential} loading={this.state.isLoading}/>
+        <Commercial properties={this.state.commercial} loading={this.state.isLoading}/>
+        <Retail properties={this.state.retail} loading={this.state.isLoading}/>
         <Footer/>
       </Aux>
     );

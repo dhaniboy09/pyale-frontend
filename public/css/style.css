@@ -491,6 +491,10 @@ iframe {
     background-position: center;
 }
 
+.loader {
+    background-image: url("../images/loader.gif");
+}
+
 .home-title {
     font-size: 36px;
     line-height: 64px;

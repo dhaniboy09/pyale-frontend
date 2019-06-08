@@ -63,9 +63,7 @@ class Properties extends React.Component {
   };
 
   render() {
-    console.log(this.props.allProperties, "all");
     let activeProperties = this.props.allProperties.filter((property) => { return property.active });
-    console.log(activeProperties, "active");
     return (
       <div>
         <Aux>
@@ -247,12 +245,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadProperties: () => {
-      dispatch(loadProperties())
-    },
-    filterProperties: (filters) => {
-      dispatch(filterProperties(filters))
-    }
+    loadProperties: () => { dispatch(loadProperties()) },
+    filterProperties: (filters) => { dispatch(filterProperties(filters)) }
   }
 };
 

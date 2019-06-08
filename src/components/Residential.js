@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
+import {Loader} from "./Loader";
 
 class Residential extends React.Component {
   showPropertyDetail = (e) => {
@@ -23,6 +24,9 @@ class Residential extends React.Component {
                 or annually. You also gain access to our dedicated tenant portal, which provides
                 an easy way to pay bills, access relevant documents, raise issues and much more.
               </p>
+              <div className="text-center margin-t-50">
+                <Loader isLoading={this.props.loading}/>
+              </div>
             </div>
           </div>
 
